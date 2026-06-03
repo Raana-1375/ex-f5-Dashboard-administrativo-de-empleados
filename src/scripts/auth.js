@@ -2,12 +2,12 @@
 import { showDashboard, showLogin } from './ui.js';
 
 export const handleLogin = (username, password) => {
-    // Basic validation for now; will be replaced by API calls later
-    if (username === 'admin' && password === '1234') {
+    // Check if password has at least 8 characters
+    if (username === 'admin' && password === '12345678') {
         showDashboard(); 
         return true;
     } else {
-        alert('Invalid username or password!');
+        alert('Invalid credentials or password too short!');
         return false;
     }
 };
