@@ -1,20 +1,30 @@
 // main.js
 import { handleLogin } from './auth.js';
+import { showDashboard, showLogin } from './ui.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('App initialized');
+    // Oturum kontrolü
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        showDashboard();
+    } else {
+        showLogin();
+    }
 
-    // Simple event listener for login simulation
-    // Ensure you have an element with id="login-form" in your index.html
     const loginForm = document.getElementById('login-form');
-    
     if (loginForm) {
         loginForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const username = event.target.username.value;
             const password = event.target.password.value;
-            
             handleLogin(username, password);
+        });
+    }
+
+    // Logout butonunu bağlayalım
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            import('./auth.js').then(module => module.handleLogout());
         });
     }
 });
