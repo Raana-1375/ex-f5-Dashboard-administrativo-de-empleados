@@ -1,27 +1,32 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Management Dashboard</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/global.css">
 </head>
 <body>
+
     <header>
         <nav>
             <h1>Admin Dashboard</h1>
-            <button id="logout-btn">Logout</button>
         </nav>
     </header>
 
     <main id="app">
-        <section id="filters">
-            </section>
-
-        <section id="employee-list">
-            <p>Loading...</p>
+        <section id="login-section">
+            <h2>Login</h2>
+        </section>
+        
+        <section id="employee-gallery" style="display: none;">
+            <h2>Employee List</h2>
         </section>
     </main>
+
+    <footer>
+        <p>&copy; 2026 Employee Management System</p>
+    </footer>
 
     <script type="module" src="scripts/main.js"></script>
 </body>
