@@ -1,0 +1,33 @@
+{
+  "name": "ex-f5-dashboard-administrativo-de-empleados",
+  "version": "1.0.0",
+  "description": "Administrative dashboard for employee management",
+  "main": "src/scripts/main.js",
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "start": "echo 'Open src/index.html in your browser to view the project.'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raana-1375/ex-f5-Dashboard-administrativo-de-empleados.git"
+  },
+  "keywords": [
+    "dashboard",
+    "employees",
+    "javascript",
+    "api"
+  ],
+  "author": "Raana Afkari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raana-1375/ex-f5-Dashboard-administrativo-de-empleados/issues"
+  },
+  "homepage": "https://github.com/Raana-1375/ex-f5-Dashboard-administrativo-de-empleados#readme",
+  "devDependencies": {
+    "playwright": "^1.60.0",
+    "vitest": "^4.1.8"
+  }
+}
+
