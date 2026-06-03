@@ -1,2 +1,7 @@
 import { handleLogout } from './auth.js';
-document.getElementById('logout-btn').addEventListener('click', handleLogout);
+import { showLogin } from './ui.js';
+
+document.addEventListener('DOMContentLoaded', () => {
+    showLogin();
+    document.getElementById('logout-btn').addEventListener('click', handleLogout);
+});
