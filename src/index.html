@@ -16,35 +16,38 @@
                 <p>Human Resources Management</p>
             </header>
 
-            <form id="login-form" novalidate>
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="name@company.com" required>
-                </div>
-
-                <div class="form-group">
-                    <div class="password-utility">
-                        <label for="password">Password</label>
-                        <a href="#" id="forgot-password">Forgot Password?</a>
+            <section id="login-section">
+                <form id="login-form" novalidate>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="name@company.com" required>
                     </div>
-                    <input type="password" id="password" placeholder="••••••••" required>
-                </div>
 
-                <label class="checkbox-container">
-                    <input type="checkbox" id="remember-me"> Remember for 30 days
-                </label>
+                    <div class="form-group">
+                        <div class="password-utility">
+                            <label for="password">Password</label>
+                            <a href="#" id="forgot-password">Forgot Password?</a>
+                        </div>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                    </div>
 
-                <button type="submit" id="submit-btn" class="btn-signin">Sign In →</button>
-            </form>
-            <section id="dashboard" class="hidden">
-    <header class="dashboard-header">
-        <h2>Employee Gallery</h2>
-        <button id="logout-btn">Logout</button>
-    </header>
-    
-    <div id="employee-grid" class="employee-grid">
-        </div>
-</section>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember-me"> Remember for 30 days
+                    </label>
+
+                    <button type="submit" id="submit-btn" class="btn-signin">Sign In →</button>
+                </form>
+            </section>
+
+            <section id="employee-gallery" class="hidden">
+                <header class="dashboard-header">
+                    <h2>Employee Gallery</h2>
+                    <button id="logout-btn">Logout</button>
+                </header>
+                
+                <div id="employee-grid" class="employee-grid">
+                    </div>
+            </section>
 
             <section class="social-login">
                 <p>Or continue with</p>
@@ -62,6 +65,6 @@
         </div>
     </main>
 
-    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/main.js"></script>
 </body>
 </html>
