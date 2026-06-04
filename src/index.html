@@ -4,21 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Core | Admin Login</title>
-    <!-- Importing styles from CSS folder to follow modular approach -->
     <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
     <main class="login-wrapper">
         <div class="login-container">
-            <!-- Brand Identity Area -->
             <header class="brand-header">
                 <div class="logo-placeholder"></div>
                 <h1>HR Core</h1>
                 <p>human Resources Management</p>
             </header>
 
-            <!-- Authentication Form -->
             <form id="login-form" novalidate>
                 <div class="form-group">
                     <label for="email">Email Address</label>
@@ -37,10 +34,9 @@
                     <input type="checkbox" id="remember-me"> Remember for 30 days
                 </label>
 
-                <button type="submit" id="submit-btn">Sign In →</button>
+                <button type="submit" id="submit-btn" class="btn-signin">Sign In →</button>
             </form>
 
-            <!-- SSO Authentication Options -->
             <section class="social-login">
                 <p>Or continue with</p>
                 <div class="sso-actions">
@@ -49,7 +45,6 @@
                 </div>
             </section>
 
-            <!-- Utility Footer Links -->
             <footer class="utility-footer">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
@@ -58,7 +53,6 @@
         </div>
     </main>
 
-    <!-- Loading modular authentication script -->
     <script type="module" src="scripts/auth.js"></script>
 </body>
 </html>

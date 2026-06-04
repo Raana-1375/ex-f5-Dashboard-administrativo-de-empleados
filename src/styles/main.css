@@ -1,7 +1,5 @@
-/* Importing Google Fonts as requested - Always from CSS [cite: 5, 6] */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
-/* Global Reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -17,39 +15,68 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Card Styling for Responsive Design [cite: 11, 24] */
 .login-container {
     background: white;
     padding: 40px;
     width: 90%;
     max-width: 390px;
     border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .brand-header {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.password-utility {
+    display: flex;
+    justify-content: space-between;
 }
 
 input {
     width: 100%;
     padding: 12px;
-    margin-top: 8px;
     border: 1px solid #ddd;
     border-radius: 8px;
 }
 
 .btn-signin {
     width: 100%;
-    padding: 12px;
+    padding: 14px;
     background-color: #0055ff;
     color: white;
     border: none;
     border-radius: 8px;
+    font-weight: 600;
     cursor: pointer;
+}
+
+.sso-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-sso {
+    flex: 1;
+    padding: 10px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.utility-footer {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 12px;
 }
