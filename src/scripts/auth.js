@@ -11,7 +11,7 @@ export const handleLogin = (username, password) => {
     // .{8,}    : Ensures a minimum length of 8 characters.
     const passwordRegex = /^(?=.*\d).{8,}$/;
 
-    if (username === 'admin' && passwordRegex.test(password)) {
+    if (username === 'admin@hr.com' && passwordRegex.test(password)) {
         // Save the login state to localStorage
         localStorage.setItem('isLoggedIn', 'true');
         showDashboard();
