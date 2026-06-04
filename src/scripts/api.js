@@ -1,10 +1,10 @@
-// api.js
+// src/scripts/api.js
 
-export const fetchData = async (url) => {
-  console.log("Loading..."); // Visual feedback for the user
+export const fetchData = async (url, options = {}) => {
+  console.log("Loading..."); 
 
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, options);
 
     if (!response.ok) {
       throw new Error(`HTTP Error: ${response.status}`);
@@ -15,6 +15,6 @@ export const fetchData = async (url) => {
 
   } catch (error) {
     console.error("Fetch error:", error);
-    return null; // Return null to prevent the application from crashing
+    return null; 
   }
 };
