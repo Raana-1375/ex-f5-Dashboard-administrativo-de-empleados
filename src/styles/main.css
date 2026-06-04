@@ -80,3 +80,23 @@ input {
     text-align: center;
     font-size: 12px;
 }
+
+
+.hidden {
+    display: none;
+}
+
+
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.employee-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
