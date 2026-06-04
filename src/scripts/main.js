@@ -62,3 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+// Search functionality
+document.getElementById('search-input').addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const rows = document.querySelectorAll('#employee-list tr');
+    
+    rows.forEach(row => {
+        const text = row.textContent.toLowerCase();
+        row.style.display = text.includes(searchTerm) ? '' : 'none';
+    });
+});

@@ -40,10 +40,16 @@
             </section>
 
             <section id="employee-gallery" class="hidden">
-                <header class="dashboard-header">
-                    <h2>Employee Gallery</h2>
-                    <button id="logout-btn">Logout</button>
-                </header>
+               <header class="dashboard-header">
+        <div>
+            <h2>Employees</h2>
+            <p>Manage your active workforce</p>
+        </div>
+        <div class="header-actions">
+            <input type="text" id="search-input" placeholder="Search employees...">
+            <button id="add-btn" class="btn-primary">+ Add Employee</button>
+        </div>
+    </header>
                 
                 <div id="employee-grid">
     <table class="employee-table">
