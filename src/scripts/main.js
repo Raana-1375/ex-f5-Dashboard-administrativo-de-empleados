@@ -1,41 +1,32 @@
-// main.js
-import { handleLogin } from './auth.js';
+// src/scripts/main.js
+import { handleLogin, handleLogout } from './auth.js';
 import { showDashboard, showLogin } from './ui.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Oturum kontrolü
+    // 1. Session check on page load
     if (localStorage.getItem('isLoggedIn') === 'true') {
         showDashboard();
     } else {
         showLogin();
     }
 
+    // 2. Login form submission
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (event) => {
             event.preventDefault();
-            const username = event.target.username.value;
+            // Ensure these match your HTML input IDs
+            const email = event.target.email.value;
             const password = event.target.password.value;
-            handleLogin(username, password);
+            handleLogin(email, password);
         });
     }
 
-    // Logout butonunu bağlayalım
+    // 3. Logout button click
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
-            import('./auth.js').then(module => module.handleLogout());
+            handleLogout();
         });
     }
-});
-import { handleLogin } from './auth.js';
-
-const loginForm = document.querySelector('#login-form');
-
-loginForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-    
-    handleLogin(email, password);
 });
