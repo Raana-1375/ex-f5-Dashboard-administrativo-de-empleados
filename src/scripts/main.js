@@ -28,3 +28,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+import { handleLogin } from './auth.js';
+
+const loginForm = document.querySelector('#login-form');
+
+loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+    
+    handleLogin(email, password);
+});
