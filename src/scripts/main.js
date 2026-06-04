@@ -11,9 +11,10 @@ const loadEmployees = async () => {
     const listContainer = document.getElementById('employee-list');
     const errorBanner = document.getElementById('error-message');
     
+    // UI feedback: Loading indicator could be added here
     const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
 
-    if (employees) {
+    if (employees && listContainer) {
         // Hide error banner and render the list
         errorBanner.classList.add('hidden');
         listContainer.innerHTML = employees.map(user => `
@@ -48,7 +49,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = event.target.email.value;
             const password = event.target.password.value;
             
+            // Updated: Ensure Dashboard is shown BEFORE loading data
             if (handleLogin(email, password)) {
+                showDashboard(); 
                 loadEmployees();
             }
         });
@@ -59,16 +62,21 @@ document.addEventListener('DOMContentLoaded', () => {
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
             handleLogout();
+            showLogin(); // Add this to reset UI on logout
         });
     }
-});
-// Search functionality
-document.getElementById('search-input').addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const rows = document.querySelectorAll('#employee-list tr');
     
-    rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(searchTerm) ? '' : 'none';
-    });
+    // Search functionality - Wrapped in a check to avoid errors if not on dashboard
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#employee-list tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    }
 });

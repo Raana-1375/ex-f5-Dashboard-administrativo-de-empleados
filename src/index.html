@@ -37,53 +37,54 @@
 
                     <button type="submit" id="submit-btn" class="btn-signin">Sign In →</button>
                 </form>
+
+                <section class="social-login">
+                    <p>Or continue with</p>
+                    <div class="sso-actions">
+                        <button type="button" class="btn-sso">Google</button>
+                        <button type="button" class="btn-sso">SSO</button>
+                    </div>
+                </section>
+
+                <footer class="utility-footer">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Security</a>
+                </footer>
             </section>
 
             <section id="employee-gallery" class="hidden">
                <header class="dashboard-header">
-        <div>
-            <h2>Employees</h2>
-            <p>Manage your active workforce</p>
-        </div>
-        <div class="header-actions">
-            <input type="text" id="search-input" placeholder="Search employees...">
-            <button id="add-btn" class="btn-primary">+ Add Employee</button>
-        </div>
-    </header>
+    <div>
+        <h2>Employees</h2>
+        <p>Manage your active workforce</p>
+    </div>
+    <div class="header-actions">
+        <input type="text" id="search-input" placeholder="Search employees...">
+        <button id="add-btn" class="btn-primary">+ Add Employee</button>
+        <button id="logout-btn" class="btn-secondary">Logout</button>
+    </div>
+</header>
                 
                 <div id="employee-grid">
-    <table class="employee-table">
-        <thead>
-            <tr>
-                <th>Employee</th>
-                <th>Job Title</th>
-                <th>Department</th>
-                <th>Address</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="employee-list">
-            </tbody>
-    </table>
-    <div id="error-message" class="error-banner hidden">
-        Failed to load data. <button onclick="location.reload()">Please retry.</button>
-    </div>
-</div>
-            </section>
-
-            <section class="social-login">
-                <p>Or continue with</p>
-                <div class="sso-actions">
-                    <button type="button" class="btn-sso">Google</button>
-                    <button type="button" class="btn-sso">SSO</button>
+                    <table class="employee-table">
+                        <thead>
+                            <tr>
+                                <th>Employee</th>
+                                <th>Job Title</th>
+                                <th>Department</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employee-list">
+                        </tbody>
+                    </table>
+                    <div id="error-message" class="error-banner hidden">
+                        Failed to load data. <button onclick="location.reload()">Please retry.</button>
+                    </div>
                 </div>
             </section>
-
-            <footer class="utility-footer">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Security</a>
-            </footer>
         </div>
     </main>
 
