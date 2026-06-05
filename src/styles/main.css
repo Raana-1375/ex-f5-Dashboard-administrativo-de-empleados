@@ -9,8 +9,9 @@
 body {
     font-family: 'Inter', sans-serif;
     display: flex;
-    flex-direction: column; 
-    min-height: 100vh;      
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     background-color: #f9f9f9;
 }
 
@@ -209,22 +210,15 @@ input {
     gap: 10px;
     margin-top: 15px;
 }
-/* Updated footer styling for natural page flow */
+
+/* Footer positioning to stay at the bottom of the page */
 footer {
-    position: relative;
-    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
     padding: 1rem;
     text-align: center;
     background-color: #f9f9f9;
     border-top: 1px solid #ddd;
-}
-/* Footer global styling */
-footer {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    background-color: #f9f9f9;
-    border-top: 1px solid #ddd;
-    margin-top: auto; /* Pushes footer to bottom */
 }
