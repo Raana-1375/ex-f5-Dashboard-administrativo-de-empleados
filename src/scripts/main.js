@@ -5,21 +5,43 @@ import { fetchData } from './api.js';
 
 let allEmployees = [];
 
+/**
+ * Loads employees from localStorage if available, 
+ * otherwise fetches from the API.
+ */
 const loadEmployees = async () => {
     const listContainer = document.getElementById('employee-list');
     const errorBanner = document.getElementById('error-message');
-    
+
+    // Show loading state
+    listContainer.innerHTML = '<tr><td colspan="5">Loading employees...</td></tr>';
+
     try {
-        if (listContainer) listContainer.innerHTML = '<tr><td colspan="5">Loading employees...</td></tr>';
-        
-        const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
-        
-        if (employees && listContainer) {
+        // 1. Check if data exists in localStorage
+        const savedEmployees = localStorage.getItem('myEmployees');
+
+        if (savedEmployees) {
+            // Use cached data if available
+            allEmployees = JSON.parse(savedEmployees);
+            renderEmployees(allEmployees);
+            console.log("Data loaded from localStorage.");
+        } else {
+            // 2. Otherwise, fetch from API
+            const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
+            
+            // Store fetched data in global variable and localStorage
             allEmployees = employees;
-            if (errorBanner) errorBanner.classList.add('hidden');
-            renderEmployees(employees);
+            localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
+            
+            renderEmployees(allEmployees);
+            console.log("Data fetched from API and cached.");
         }
+
+        // Hide error banner if successful
+        if (errorBanner) errorBanner.classList.add('hidden');
+        
     } catch (error) {
+        // Handle errors gracefully
         console.error('Error loading employees:', error);
         if (errorBanner) errorBanner.classList.remove('hidden');
     }
@@ -121,7 +143,7 @@ if (addEmployeeForm) {
 
         // Listeye ekle
         allEmployees.push(newEmployee);
-        
+        localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
         // Listeyi güncelle
         renderEmployees(allEmployees);
         
