@@ -24,8 +24,10 @@ const loadEmployees = async () => {
             // Use cached data if available
             allEmployees = JSON.parse(savedEmployees);
             renderEmployees(allEmployees);
+
             console.log("Data loaded from localStorage.");
         } else {
+
             // 2. Otherwise, fetch from API
             const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
             
@@ -36,6 +38,30 @@ const loadEmployees = async () => {
             renderEmployees(allEmployees);
             console.log("Data fetched from API and cached.");
         }
+        
+        // Event delegation for the table actions (Delete)
+const listContainer = document.getElementById('employee-list');
+
+if (listContainer) {
+    listContainer.addEventListener('click', (e) => {
+        // Check if the clicked element has the 'delete-btn' class
+        if (e.target.classList.contains('delete-btn')) {
+            // Get the ID of the selected row
+            const id = e.target.closest('tr').dataset.id;
+            
+            if (confirm("Are you sure you want to delete this employee?")) {
+                // 1. Remove from the array
+                allEmployees = allEmployees.filter(emp => emp.id != id);
+                
+                // 2. Update localStorage
+                localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
+                
+                // 3. Re-render the table
+                renderEmployees(allEmployees);
+            }
+        }
+    });
+}
 
         // Hide error banner if successful
         if (errorBanner) errorBanner.classList.add('hidden');
