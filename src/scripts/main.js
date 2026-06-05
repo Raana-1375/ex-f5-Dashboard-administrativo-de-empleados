@@ -3,7 +3,6 @@ import { handleLogin, handleLogout } from './auth.js';
 import { showDashboard, showLogin } from './ui.js';
 import { fetchData } from './api.js';
 
-// Global variable to store employee data for filtering
 let allEmployees = [];
 
 const loadEmployees = async () => {
@@ -11,13 +10,12 @@ const loadEmployees = async () => {
     const errorBanner = document.getElementById('error-message');
     
     try {
-        // UI feedback: Loading...
         listContainer.innerHTML = '<tr><td colspan="5">Loading employees...</td></tr>';
         
         const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
         
         if (employees && listContainer) {
-            allEmployees = employees; // Save data globally
+            allEmployees = employees;
             errorBanner.classList.add('hidden');
             renderEmployees(employees);
         }
@@ -40,7 +38,6 @@ const renderEmployees = (employees) => {
     `).join('');
 };
 
-// New Filter Function with Error Handling
 const filterEmployees = (term) => {
     try {
         const filtered = allEmployees.filter(user => 
@@ -53,7 +50,6 @@ const filterEmployees = (term) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Session check...
     if (localStorage.getItem('isLoggedIn') === 'true') {
         showDashboard();
         loadEmployees();
@@ -61,7 +57,28 @@ document.addEventListener('DOMContentLoaded', () => {
         showLogin();
     }
 
-    // Search event listener
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const email = event.target.email.value;
+            const password = event.target.password.value;
+            
+            if (handleLogin(email, password)) {
+                showDashboard(); 
+                loadEmployees();
+            }
+        });
+    }
+
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            handleLogout();
+            showLogin();
+        });
+    }
+
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -69,5 +86,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ... (diğer login/logout event'leri aynen kalacak)
+    // Modal interaction logic
+    const modal = document.getElementById('add-employee-modal');
+    const addBtn = document.getElementById('add-btn');
+    const closeBtn = document.getElementById('close-modal-btn');
+
+    if (addBtn) {
+        addBtn.addEventListener('click', () => {
+            try {
+                modal.classList.remove('hidden');
+            } catch (error) {
+                console.error('Failed to open modal:', error);
+            }
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            try {
+                modal.classList.add('hidden');
+            } catch (error) {
+                console.error('Failed to close modal:', error);
+            }
+        });
+    }
 });
