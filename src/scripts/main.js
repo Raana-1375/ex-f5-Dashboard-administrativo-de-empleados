@@ -4,7 +4,7 @@ import { handleLogin, handleLogout } from './auth.js';
 import { fetchData } from './api.js';
 
 let allEmployees = [];
-
+let editingEmployeeId = null;
 /**
  * Loads employees from localStorage if available, 
  * otherwise fetches from the API.
@@ -21,58 +21,54 @@ const loadEmployees = async () => {
         const savedEmployees = localStorage.getItem('myEmployees');
 
         if (savedEmployees) {
-            // Use cached data if available
             allEmployees = JSON.parse(savedEmployees);
             renderEmployees(allEmployees);
-
             console.log("Data loaded from localStorage.");
         } else {
-
             // 2. Otherwise, fetch from API
             const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
-            
-            // Store fetched data in global variable and localStorage
             allEmployees = employees;
             localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
-            
             renderEmployees(allEmployees);
             console.log("Data fetched from API and cached.");
         }
-        
-        // Event delegation for the table actions (Delete)
-const listContainer = document.getElementById('employee-list');
-
-if (listContainer) {
-    listContainer.addEventListener('click', (e) => {
-        // Check if the clicked element has the 'delete-btn' class
-        if (e.target.classList.contains('delete-btn')) {
-            // Get the ID of the selected row
-            const id = e.target.closest('tr').dataset.id;
-            
-            if (confirm("Are you sure you want to delete this employee?")) {
-                // 1. Remove from the array
-                allEmployees = allEmployees.filter(emp => emp.id != id);
-                
-                // 2. Update localStorage
-                localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
-                
-                // 3. Re-render the table
-                renderEmployees(allEmployees);
-            }
-        }
-    });
-}
 
         // Hide error banner if successful
         if (errorBanner) errorBanner.classList.add('hidden');
         
     } catch (error) {
-        // Handle errors gracefully
         console.error('Error loading employees:', error);
         if (errorBanner) errorBanner.classList.remove('hidden');
     }
 };
 
+// Event delegation for the table actions (Delete and Edit)
+const listContainer = document.getElementById('employee-list');
+if (listContainer) {
+    listContainer.addEventListener('click', (e) => {
+        const row = e.target.closest('tr');
+        if (!row) return;
+        const id = row.dataset.id;
+
+        // Handle Delete action
+        if (e.target.classList.contains('delete-btn')) {
+            if (confirm("Are you sure you want to delete this employee?")) {
+                allEmployees = allEmployees.filter(emp => emp.id != id);
+                localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
+                renderEmployees(allEmployees);
+            }
+        }
+
+        // Handle Edit action
+        if (e.target.classList.contains('edit-btn')) {
+            const employee = allEmployees.find(emp => emp.id == id);
+            if (employee) {
+                console.log("Editing employee:", employee);
+                // Future: Modal logic will be implemented here
+            }
+        }
+    });
+}
 
 const filterEmployees = (term) => {
     try {
@@ -86,7 +82,6 @@ const filterEmployees = (term) => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Auth Durum Kontrolü
     if (localStorage.getItem('isLoggedIn') === 'true') {
         showDashboard();
         loadEmployees();
@@ -94,7 +89,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showLogin();
     }
 
-    // 2. Login Form İşlemleri
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (event) => {
@@ -109,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Logout İşlemi
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.addEventListener('click', () => {
@@ -118,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Arama Çubuğu
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -126,55 +118,82 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Modal İşlemleri
     const modal = document.getElementById('add-employee-modal');
     const addBtn = document.getElementById('add-btn');
     const closeBtn = document.getElementById('close-modal-btn');
 
-    if (addBtn && modal) {
+   if (addBtn && modal) {
         addBtn.addEventListener('click', () => {
-            try {
-                modal.classList.remove('hidden');
-            } catch (error) {
-                console.error('Failed to open modal:', error);
-            }
+            document.getElementById('modal-title').innerText = 'Add New Employee'; // BAŞLIĞI SIFIRLA
+            modal.classList.remove('hidden');
         });
     }
 
     if (closeBtn && modal) {
-        closeBtn.addEventListener('click', () => {
-            try {
-                modal.classList.add('hidden');
-            } catch (error) {
-                console.error('Failed to close modal:', error);
-            }
-        });
+        closeBtn.addEventListener('click', () => modal.classList.add('hidden'));
     }
 });
-// Add Employee Form Yönetimi
+
 const addEmployeeForm = document.getElementById('add-employee-form');
 if (addEmployeeForm) {
     addEmployeeForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Sayfa yenilenmesin
+    e.preventDefault();
+    const formData = new FormData(addEmployeeForm);
 
-        // Formdan verileri çek
-        const formData = new FormData(addEmployeeForm);
-        const newEmployee = {
-            id: Date.now(), // Basit bir benzersiz ID
+    if (editingEmployeeId) {
+        // GÜNCELLEME İŞLEMİ
+        allEmployees = allEmployees.map(emp => emp.id == editingEmployeeId ? {
+            ...emp,
             name: formData.get('name'),
             email: formData.get('email'),
-            company: { name: formData.get('department') }, // API yapısına uygun tutuyoruz
+            job: formData.get('job'),
+            company: { name: formData.get('department') },
+            address: { city: formData.get('address') }
+        } : emp);
+        editingEmployeeId = null; // İş bitince hafızayı temizle
+    } else {
+        // YENİ EKLEME İŞLEMİ
+        const newEmployee = {
+            id: Date.now(),
+            name: formData.get('name'),
+            email: formData.get('email'),
+            job: formData.get('job'),
+            company: { name: formData.get('department') },
             address: { city: formData.get('address') }
         };
-
-        // Listeye ekle
         allEmployees.push(newEmployee);
-        localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
-        // Listeyi güncelle
-        renderEmployees(allEmployees);
-        
-        // Modalı kapat ve formu temizle
-        document.getElementById('add-employee-modal').classList.add('hidden');
-        addEmployeeForm.reset();
-    });
+    }
+
+    localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
+    renderEmployees(allEmployees);
+    document.getElementById('add-employee-modal').classList.add('hidden');
+    addEmployeeForm.reset();
+});
 }
+
+window.deleteEmployee = (id) => {
+    if (confirm("Are you sure?")) {
+        allEmployees = allEmployees.filter(emp => emp.id != id);
+        localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
+        renderEmployees(allEmployees);
+    }
+};
+
+window.editEmployee = (id) => {
+    const employee = allEmployees.find(emp => emp.id == id);
+    if (employee) {
+        editingEmployeeId = id; 
+        
+        // BURAYA EKLE:
+        document.getElementById('modal-title').innerText = 'Edit Employee';
+        
+        document.getElementById('add-employee-modal').classList.remove('hidden');
+        
+        const form = document.getElementById('add-employee-form');
+        form.name.value = employee.name;
+        form.email.value = employee.email;
+        form.job.value = employee.job || '';
+        form.department.value = employee.company?.name || '';
+        form.address.value = employee.address?.city || '';
+    }
+};
