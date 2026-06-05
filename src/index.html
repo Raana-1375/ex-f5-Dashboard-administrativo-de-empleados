@@ -9,102 +9,52 @@
 <body>
 
     <main class="login-wrapper">
-        <div class="login-container">
+        <section id="login-section">
             <header class="brand-header">
-                <div class="logo-placeholder"></div>
                 <h1>HR Core</h1>
                 <p>Human Resources Management</p>
             </header>
-
-            <section id="login-section">
-                <form id="login-form" novalidate>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" placeholder="name@company.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="password-utility">
-                            <label for="password">Password</label>
-                            <a href="#" id="forgot-password">Forgot Password?</a>
-                        </div>
-                        <input type="password" id="password" placeholder="••••••••" required>
-                    </div>
-
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="remember-me"> Remember for 30 days
-                    </label>
-
-                    <button type="submit" id="submit-btn" class="btn-signin">Sign In →</button>
-                </form>
-
-                <section class="social-login">
-                    <p>Or continue with</p>
-                    <div class="sso-actions">
-                        <button type="button" class="btn-sso">Google</button>
-                        <button type="button" class="btn-sso">SSO</button>
-                    </div>
-                </section>
-
-                <footer class="utility-footer">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Security</a>
-                </footer>
-            </section>
-
-            <section id="employee-gallery" class="hidden">
-                <header class="dashboard-header">
-                    <div>
-                        <h2>Employees</h2>
-                        <p>Manage your active workforce</p>
-                    </div>
-                    <div class="header-actions">
-                        <input type="text" id="search-input" placeholder="Search employees...">
-                        <button id="add-btn" class="btn-primary">+ Add Employee</button>
-                        <button id="logout-btn" class="btn-secondary">Logout</button>
-                    </div>
-                </header>
-                
-                <div id="employee-grid">
-                    <table class="employee-table">
-                        <thead>
-                            <tr>
-                                <th>Employee</th>
-                                <th>Job Title</th>
-                                <th>Department</th>
-                                <th>Address</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="employee-list">
-                        </tbody>
-                    </table>
-                    <div id="error-message" class="error-banner hidden">
-                        Failed to load data. <button onclick="location.reload()">Please retry.</button>
-                    </div>
+            <form id="login-form" novalidate>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="name@company.com" required>
                 </div>
-            </section>
-
-            <section id="add-employee-modal" class="modal hidden">
-                <div class="modal-content">
-                    <h2>Add New Employee</h2>
-                    <form id="add-employee-form">
-                        <input type="text" name="name" placeholder="Name" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <input type="text" name="job" placeholder="Job Title" required>
-                        <input type="text" name="department" placeholder="Department" required>
-                        <input type="text" name="address" placeholder="Address" required>
-                        <div class="modal-actions">
-                            <button type="button" id="close-modal-btn">Cancel</button>
-                            <button type="submit">Save Employee</button>
-                        </div>
-                    </form>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
                 </div>
-            </section>
+                <button type="submit" id="submit-btn" class="btn-signin">Sign In →</button>
+            </form>
+        </section>
 
-        </div>
+        <section id="employee-gallery" class="hidden">
+            <header class="dashboard-header">
+                <h2>Employees</h2>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            </header>
+            <div id="employee-grid">
+                <table class="employee-table">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Job Title</th>
+                            <th>Department</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="employee-list"></tbody>
+                </table>
+                <div id="error-message" class="error-banner hidden">
+                    Failed to load data.
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="utility-footer">
+        <p>Privacy Policy | Terms of Service | Security</p>
+    </footer>
 
     <script type="module" src="scripts/main.js"></script>
 </body>
