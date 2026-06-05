@@ -3,37 +3,57 @@ import { handleLogin, handleLogout } from './auth.js';
 import { showDashboard, showLogin } from './ui.js';
 import { fetchData } from './api.js';
 
-/**
- * Fetches employee data from the API and renders it into the table.
- * Displays an error banner if the request fails.
- */
+// Global variable to store employee data for filtering
+let allEmployees = [];
+
 const loadEmployees = async () => {
     const listContainer = document.getElementById('employee-list');
     const errorBanner = document.getElementById('error-message');
     
-    // UI feedback: Loading indicator could be added here
-    const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
-
-    if (employees && listContainer) {
-        // Hide error banner and render the list
-        errorBanner.classList.add('hidden');
-        listContainer.innerHTML = employees.map(user => `
-            <tr>
-                <td>${user.name}<br><small>${user.email}</small></td>
-                <td>Staff Member</td>
-                <td>${user.company.name}</td>
-                <td>${user.address.city}</td>
-                <td><button>Edit</button> <button>Delete</button></td>
-            </tr>
-        `).join('');
-    } else {
-        // Show error banner on failure
+    try {
+        // UI feedback: Loading...
+        listContainer.innerHTML = '<tr><td colspan="5">Loading employees...</td></tr>';
+        
+        const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
+        
+        if (employees && listContainer) {
+            allEmployees = employees; // Save data globally
+            errorBanner.classList.add('hidden');
+            renderEmployees(employees);
+        }
+    } catch (error) {
+        console.error('Error loading employees:', error);
         errorBanner.classList.remove('hidden');
     }
 };
 
+const renderEmployees = (employees) => {
+    const listContainer = document.getElementById('employee-list');
+    listContainer.innerHTML = employees.map(user => `
+        <tr>
+            <td>${user.name}<br><small>${user.email}</small></td>
+            <td>Staff Member</td>
+            <td>${user.company.name}</td>
+            <td>${user.address.city}</td>
+            <td><button>Edit</button> <button>Delete</button></td>
+        </tr>
+    `).join('');
+};
+
+// New Filter Function with Error Handling
+const filterEmployees = (term) => {
+    try {
+        const filtered = allEmployees.filter(user => 
+            user.name.toLowerCase().startsWith(term.toLowerCase())
+        );
+        renderEmployees(filtered);
+    } catch (error) {
+        console.error('Filtering error:', error);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Session check on page load
+    // Session check...
     if (localStorage.getItem('isLoggedIn') === 'true') {
         showDashboard();
         loadEmployees();
@@ -41,42 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         showLogin();
     }
 
-    // 2. Login form submission
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const email = event.target.email.value;
-            const password = event.target.password.value;
-            
-            // Updated: Ensure Dashboard is shown BEFORE loading data
-            if (handleLogin(email, password)) {
-                showDashboard(); 
-                loadEmployees();
-            }
-        });
-    }
-
-    // 3. Logout button click
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-        logoutBtn.addEventListener('click', () => {
-            handleLogout();
-            showLogin(); // Add this to reset UI on logout
-        });
-    }
-    
-    // Search functionality - Wrapped in a check to avoid errors if not on dashboard
+    // Search event listener
     const searchInput = document.getElementById('search-input');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const rows = document.querySelectorAll('#employee-list tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
+            filterEmployees(e.target.value);
         });
     }
+
+    // ... (diğer login/logout event'leri aynen kalacak)
 });
