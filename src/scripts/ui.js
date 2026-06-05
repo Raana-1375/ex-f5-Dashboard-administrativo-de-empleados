@@ -29,3 +29,20 @@ export const showDashboard = () => {
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) logoutBtn.classList.remove('hidden');
 };
+export const renderEmployees = (employees) => {
+    const employeeList = document.getElementById('employee-list');
+    
+    // Satırları oluştururken data-id ekliyoruz (Delete/Edit için kritik)
+    employeeList.innerHTML = employees.map(emp => `
+        <tr data-id="${emp.id}">
+            <td>${emp.name}</td>
+            <td>${emp.email}</td>
+            <td>${emp.company?.name || 'N/A'}</td>
+            <td>${emp.address?.city || 'N/A'}</td>
+            <td>
+                <button class="edit-btn">Edit</button>
+                <button class="delete-btn">Delete</button>
+            </td>
+        </tr>
+    `).join('');
+};

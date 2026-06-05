@@ -1,6 +1,6 @@
 // src/scripts/main.js
+import { showLogin, showDashboard, renderEmployees } from './ui.js';
 import { handleLogin, handleLogout } from './auth.js';
-import { showDashboard, showLogin } from './ui.js';
 import { fetchData } from './api.js';
 
 let allEmployees = [];
@@ -25,20 +25,6 @@ const loadEmployees = async () => {
     }
 };
 
-const renderEmployees = (employees) => {
-    const listContainer = document.getElementById('employee-list');
-    if (!listContainer) return;
-
-    listContainer.innerHTML = employees.map(user => `
-        <tr>
-            <td>${user.name}<br><small>${user.email}</small></td>
-            <td>Staff Member</td>
-            <td>${user.company.name}</td>
-            <td>${user.address.city}</td>
-            <td><button>Edit</button> <button>Delete</button></td>
-        </tr>
-    `).join('');
-};
 
 const filterEmployees = (term) => {
     try {
