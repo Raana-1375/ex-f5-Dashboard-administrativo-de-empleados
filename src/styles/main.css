@@ -9,16 +9,15 @@
 body {
     font-family: 'Inter', sans-serif;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    flex-direction: column; 
+    min-height: 100vh;      
     background-color: #f9f9f9;
 }
 
 /* Container styling */
 .login-container {
     width: 95%;          
-    max-width: 1200px;   
+    max-width: 1200px;  
     margin: 20px auto;
     padding: 30px;
     background: #fff;
@@ -123,7 +122,7 @@ input {
 
 /* Table Layout */
 #employee-grid {
-    overflow-x: auto; 
+    overflow-x: auto;
     width: 100%;
 }
 
@@ -150,9 +149,9 @@ input {
 }
 
 @media (max-width: 600px) {
-    .employee-table th:nth-child(4), 
+    .employee-table th:nth-child(4),
     .employee-table td:nth-child(4) {
-        display: none; 
+        display: none;
     }
 }
 .btn-secondary {
@@ -167,7 +166,6 @@ input {
 .btn-secondary:hover {
     background-color: #e0e0e0;
 }
-/* src/styles/modal.css */
 
 /* Modal overlay to darken background and center content */
 .modal {
@@ -210,4 +208,14 @@ input {
     justify-content: flex-end;
     gap: 10px;
     margin-top: 15px;
+}
+/* Updated footer styling for natural page flow */
+footer {
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: 1px solid #ddd;
 }
