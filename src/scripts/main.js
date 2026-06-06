@@ -14,7 +14,7 @@ const loadEmployees = async () => {
     const errorBanner = document.getElementById('error-message');
 
     // Show loading state
-    listContainer.innerHTML = '<tr><td colspan="5">Loading employees...</td></tr>';
+    listContainer.innerHTML = '<tr><td colspan="7">Loading employees...</td></tr>';
 
     try {
         // 1. Check if data exists in localStorage
@@ -190,16 +190,19 @@ window.editEmployee = (id) => {
     if (employee) {
         editingEmployeeId = id; 
         
-        // BURAYA EKLE:
         document.getElementById('modal-title').innerText = 'Edit Employee';
-        
         document.getElementById('add-employee-modal').classList.remove('hidden');
         
         const form = document.getElementById('add-employee-form');
+        
+        // Temel bilgiler
         form.name.value = employee.name;
         form.email.value = employee.email;
-        form.job.value = employee.job || '';
-        form.department.value = employee.company?.name || '';
-        form.address.value = employee.address?.city || '';
+        
+        // Yeni adres yapısı (Eğer veri yoksa boş string atar)
+        form.street.value = employee.address?.street || '';
+        form.suite.value = employee.address?.suite || '';
+        form.city.value = employee.address?.city || '';
+        form.zipcode.value = employee.address?.zipcode || '';
     }
 };
