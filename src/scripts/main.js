@@ -146,10 +146,13 @@ if (addEmployeeForm) {
             ...emp,
             name: formData.get('name'),
             email: formData.get('email'),
-            job: formData.get('job'),
-            company: { name: formData.get('department') },
-            address: { city: formData.get('address') }
-        } : emp);
+            address: {
+            street: formData.get('street'),
+            suite: formData.get('suite'),
+            city: formData.get('city'),
+            zipcode: formData.get('zipcode')
+    }
+} : emp);
         editingEmployeeId = null; // İş bitince hafızayı temizle
     } else {
         // YENİ EKLEME İŞLEMİ
@@ -157,9 +160,12 @@ if (addEmployeeForm) {
             id: Date.now(),
             name: formData.get('name'),
             email: formData.get('email'),
-            job: formData.get('job'),
-            company: { name: formData.get('department') },
-            address: { city: formData.get('address') }
+                address: {
+            street: formData.get('street'),
+            suite: formData.get('suite'),
+            city: formData.get('city'),
+            zipcode: formData.get('zipcode')
+    }
         };
         allEmployees.push(newEmployee);
     }

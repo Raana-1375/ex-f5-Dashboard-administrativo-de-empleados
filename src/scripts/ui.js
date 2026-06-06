@@ -35,9 +35,11 @@ export const renderEmployees = (employees) => {
     employeeList.innerHTML = employees.map(emp => `
         <tr data-id="${emp.id}">
             <td>${emp.name}</td>
-            <td>${emp.job || 'N/A'}</td> 
-            <td>${emp.company?.name || 'N/A'}</td>
-            <td>${emp.address?.city || 'N/A'}</td>
+            <td>${emp.email}</td>
+            <td>${emp.address?.street || '-'}</td>
+            <td>${emp.address?.suite || '-'}</td>
+            <td>${emp.address?.city || '-'}</td>
+            <td>${emp.address?.zipcode || '-'}</td>
             <td>
                 <button onclick="window.editEmployee(${emp.id})">Edit</button>
                 <button class="delete-btn">Delete</button>

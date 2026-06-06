@@ -71,10 +71,12 @@
                     <table class="employee-table">
                         <thead>
                             <tr>
-                                <th>Employee</th>
-                                <th>Job Title</th>
-                                <th>Department</th>
-                                <th>Address</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Street</th>
+                                <th>Suite</th>
+                                <th>City</th>
+                                <th>Zipcode</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -96,9 +98,10 @@
                     <form id="add-employee-form">
                         <input type="text" name="name" placeholder="Name" required>
                         <input type="email" name="email" placeholder="Email" required>
-                        <input type="text" name="job" placeholder="Job Title" required>
-                        <input type="text" name="department" placeholder="Department" required>
-                        <input type="text" name="address" placeholder="Address" required>
+                        <input type="text" name="street" placeholder="Street" required>
+                        <input type="text" name="suite" placeholder="Suite" required>
+                        <input type="text" name="city" placeholder="City" required>
+                        <input type="text" name="zipcode" placeholder="Zipcode" required>
                         <div class="modal-actions">
                             <button type="button" id="close-modal-btn">Cancel</button>
                             <button type="submit">Save Employee</button>
