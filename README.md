@@ -165,7 +165,7 @@ Test Results
 
 The project currently includes authentication tests that execute successfully.
 Add a screenshot of the Vitest execution here:
-![Test Results](./src/assets/Testing.png)
+![Test Results](src/assets/Testing.png)
 
 ---
 
