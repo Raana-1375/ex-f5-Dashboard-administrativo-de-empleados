@@ -17,10 +17,10 @@ body {
 
 /* Container styling */
 .login-container {
-    width: 95%;          
+    width: 100%;          
     max-width: 1200px;  
-    margin: 20px auto;
-    padding: 30px;
+    margin: 0px auto;
+    padding: 24px;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
@@ -104,6 +104,7 @@ input {
 .header-actions {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 #search-input {
@@ -192,7 +193,8 @@ input {
     background: white;
     padding: 2rem;
     border-radius: 8px;
-    width: 400px;
+    width: 90%;
+    max-width: 500px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -213,7 +215,7 @@ input {
 
 /* Footer positioning to stay at the bottom of the page */
 footer {
-    position: fixed;
+    position: relative;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -228,4 +230,146 @@ footer {
     margin-top: 20px;
     color: #64748b;
     border-top: 1px solid #e2e8f0;
+}
+/* Bu kural tablo taşmasını engeller */
+#employee-grid {
+    overflow-x: auto !important;
+    max-width: 100% !important;
+}
+
+/* Tüm tablo elementlerini kısıtlar */
+table.employee-table {
+    width: 100% !important;
+    table-layout: auto !important;
+}
+
+
+/* Adjust header for small screens */
+@media (max-width: 768px) {
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .header-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .header-actions button,
+    .header-actions input {
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+
+    .employee-table,
+    .employee-table thead,
+    .employee-table tbody,
+    .employee-table th,
+    .employee-table td,
+    .employee-table tr {
+        display: block;
+    }
+
+    .employee-table thead {
+        display: none;
+    }
+
+    .employee-table tr {
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        padding: 20px;
+        background: white;
+        box-shadow: 0 4px 12px rgba(0,0,0,.08);
+        transition: all .2s ease;
+    }
+
+    .employee-table tr:hover {
+        transform: translateY(-2px);
+    }
+
+    .employee-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border: none;
+        word-break: break-word;
+    }
+
+    .employee-table td::before {
+        font-weight: bold;
+    }
+
+    .employee-table td:nth-child(1)::before {
+        content: "Name";
+    }
+
+    .employee-table td:nth-child(2)::before {
+        content: "Email";
+    }
+
+    .employee-table td:nth-child(3)::before {
+        content: "Street";
+    }
+
+    .employee-table td:nth-child(4)::before {
+        content: "Suite";
+    }
+
+    .employee-table td:nth-child(5)::before {
+        content: "City";
+    }
+
+    .employee-table td:nth-child(6)::before {
+        content: "Zipcode";
+    }
+
+    .employee-table td:nth-child(7)::before {
+        content: "Actions";
+    }
+
+    .employee-table td:last-child {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+
+    .employee-table td:last-child button {
+        padding: 8px 12px;
+        min-width: 80px;
+    }
+}
+@media (max-width: 480px) {
+
+    .modal-content {
+        width: 95%;
+        padding: 16px;
+    }
+
+    .modal-actions {
+        flex-direction: column;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+}
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-signin {
+        padding: 12px;
+    }
+
+    input {
+        font-size: 16px;
+    }
 }
