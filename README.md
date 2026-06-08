@@ -213,6 +213,10 @@ Figma prototype:
 ## Deployment
 
 GitHub Pages:
+Important reminder:
+
+The readme is directly visible on my webpage. We checked it together, but it hasn't been fixed. You asked me to remind you about this.
+Normally, all features work as if they were on a single page.
 
 ( https://raana-1375.github.io/ex-f5-Dashboard-administrativo-de-empleados/)
 
