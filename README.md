@@ -196,7 +196,10 @@ The board includes:
 * User stories
 * Tasks and subtasks
 * Due dates
+* **Jira Board:** [Access the Project Board Here](https://raanaafkari96.atlassian.net/jira/software/c/projects/DADE/boards/67/backlog)
 
+![Jira Board](src/assets/jira.png)
+![Jira Board](src/assets/jira2.png)
 ---
 
 ## Prototype
@@ -211,7 +214,7 @@ Figma prototype:
 
 GitHub Pages:
 
-()
+( https://raana-1375.github.io/ex-f5-Dashboard-administrativo-de-empleados/)
 
 ---
 
