@@ -1,9 +1,7 @@
 /* src/styles/global.css */
 
-/* Importing Google Fonts via CSS */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-/* Basic reset for consistent cross-browser styling */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -11,7 +9,6 @@
 }
 
 :root {
-    /* CSS variables for global theme management */
     --primary-color: #2563eb;
     --text-color: #1f2937;
     --bg-color: #f3f4f6;

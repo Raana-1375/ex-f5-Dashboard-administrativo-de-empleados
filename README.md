@@ -5,7 +5,7 @@
 HR Core Dashboard is a responsive administrative web application developed to manage employee information. The application allows an administrator to authenticate using email and password, access a protected dashboard, view employee data retrieved from an external API, filter employees, and manage session persistence using localStorage.
 
 This project was developed using HTML5, CSS3, and Vanilla JavaScript following a modular architecture.
-
+Commit Convention: This project strictly follows Conventional Commits (e.g., feat:, fix:, docs:).
 ---
 
 ## Features
@@ -22,6 +22,23 @@ This project was developed using HTML5, CSS3, and Vanilla JavaScript following a
 * Session persistence with localStorage
 * Responsive design for mobile and desktop
 * Unit testing with Vitest
+
+## Userflow
+
+The following diagram illustrates the application's user authentication flow and the dashboard navigation logic:
+
+![Userflow](src/assets/Userflow.png)
+
+### Logic Overview:
+1. **Login / Session Check:** The application checks for an active session in `localStorage`. If it exists, the user is redirected directly to the **Dashboard**.
+2. **Dashboard:** The main hub for managing employee data.
+3. **Employee List:** Displays the workforce with options for CRUD operations.
+4. **Operations:**
+   * **Search / Filter:** Dynamically updates the employee list.
+   * **Add Employee:** Opens a modal to create new records.
+   * **Edit Employee:** Modifies existing employee details.
+   * **Delete Employee:** Removes a record from the list.
+5. **Logout:** Terminates the session and redirects the user back to the login page.
 
 ---
 

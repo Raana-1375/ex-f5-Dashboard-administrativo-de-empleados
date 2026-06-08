@@ -5,19 +5,14 @@ import { fetchData } from './api.js';
 
 let allEmployees = [];
 let editingEmployeeId = null;
-/**
- * Loads employees from localStorage if available, 
- * otherwise fetches from the API.
- */
+
 const loadEmployees = async () => {
     const listContainer = document.getElementById('employee-list');
     const errorBanner = document.getElementById('error-message');
 
-    // Show loading state
     listContainer.innerHTML = '<tr><td colspan="7">Loading employees...</td></tr>';
 
     try {
-        // 1. Check if data exists in localStorage
         const savedEmployees = localStorage.getItem('myEmployees');
 
         if (savedEmployees) {
@@ -25,7 +20,6 @@ const loadEmployees = async () => {
             renderEmployees(allEmployees);
             console.log("Data loaded from localStorage.");
         } else {
-            // 2. Otherwise, fetch from API
             const employees = await fetchData('https://jsonplaceholder.typicode.com/users');
             allEmployees = employees;
             localStorage.setItem('myEmployees', JSON.stringify(allEmployees));
@@ -33,7 +27,6 @@ const loadEmployees = async () => {
             console.log("Data fetched from API and cached.");
         }
 
-        // Hide error banner if successful
         if (errorBanner) errorBanner.classList.add('hidden');
         
     } catch (error) {
@@ -50,7 +43,6 @@ if (listContainer) {
         if (!row) return;
         const id = row.dataset.id;
 
-        // Handle Delete action
         if (e.target.classList.contains('delete-btn')) {
             if (confirm("Are you sure you want to delete this employee?")) {
                 allEmployees = allEmployees.filter(emp => emp.id != id);
@@ -59,7 +51,6 @@ if (listContainer) {
             }
         }
 
-        // Handle Edit action
         if (e.target.classList.contains('edit-btn')) {
             const employee = allEmployees.find(emp => emp.id == id);
             if (employee) {
@@ -124,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
    if (addBtn && modal) {
         addBtn.addEventListener('click', () => {
-            document.getElementById('modal-title').innerText = 'Add New Employee'; // BAŞLIĞI SIFIRLA
+            document.getElementById('modal-title').innerText = 'Add New Employee'; 
             modal.classList.remove('hidden');
         });
     }
@@ -141,7 +132,6 @@ if (addEmployeeForm) {
     const formData = new FormData(addEmployeeForm);
 
     if (editingEmployeeId) {
-        // GÜNCELLEME İŞLEMİ
         allEmployees = allEmployees.map(emp => emp.id == editingEmployeeId ? {
             ...emp,
             name: formData.get('name'),
@@ -153,9 +143,8 @@ if (addEmployeeForm) {
             zipcode: formData.get('zipcode')
     }
 } : emp);
-        editingEmployeeId = null; // İş bitince hafızayı temizle
+        editingEmployeeId = null; 
     } else {
-        // YENİ EKLEME İŞLEMİ
         const newEmployee = {
             id: Date.now(),
             name: formData.get('name'),
@@ -194,12 +183,8 @@ window.editEmployee = (id) => {
         document.getElementById('add-employee-modal').classList.remove('hidden');
         
         const form = document.getElementById('add-employee-form');
-        
-        // Temel bilgiler
         form.name.value = employee.name;
         form.email.value = employee.email;
-        
-        // Yeni adres yapısı (Eğer veri yoksa boş string atar)
         form.street.value = employee.address?.street || '';
         form.suite.value = employee.address?.suite || '';
         form.city.value = employee.address?.city || '';

@@ -15,7 +15,6 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Container styling */
 .login-container {
     width: 100%;          
     max-width: 1200px;  
@@ -93,7 +92,6 @@ input {
     display: none;
 }
 
-/* Dashboard Header Styles */
 .dashboard-header {
     display: flex;
     justify-content: space-between;
@@ -169,7 +167,6 @@ input {
     background-color: #e0e0e0;
 }
 
-/* Modal overlay to darken background and center content */
 .modal {
     position: fixed;
     top: 0;
@@ -183,12 +180,10 @@ input {
     z-index: 1000;
 }
 
-/* Hidden state to control visibility */
 .modal.hidden {
     display: none;
 }
 
-/* Modal content container */
 .modal-content {
     background: white;
     padding: 2rem;
@@ -198,7 +193,6 @@ input {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Modal form inputs styling */
 #add-employee-form input {
     width: 100%;
     margin-bottom: 10px;
@@ -213,7 +207,6 @@ input {
     margin-top: 15px;
 }
 
-/* Footer positioning to stay at the bottom of the page */
 footer {
     position: relative;
     bottom: 0;
@@ -231,20 +224,17 @@ footer {
     color: #64748b;
     border-top: 1px solid #e2e8f0;
 }
-/* Bu kural tablo taşmasını engeller */
+
 #employee-grid {
     overflow-x: auto !important;
     max-width: 100% !important;
 }
 
-/* Tüm tablo elementlerini kısıtlar */
 table.employee-table {
     width: 100% !important;
     table-layout: auto !important;
 }
 
-
-/* Adjust header for small screens */
 @media (max-width: 768px) {
 
     .dashboard-header {

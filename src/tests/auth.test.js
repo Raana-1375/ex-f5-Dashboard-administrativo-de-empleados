@@ -1,8 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { handleLogin } from '../scripts/auth.js';
 
-// --- MOCKING BÖLÜMÜ ---
-// localStorage'ı test için taklit ediyoruz
 const localStorageMock = {
     getItem: vi.fn(),
     setItem: vi.fn(),
@@ -11,11 +9,9 @@ const localStorageMock = {
 };
 global.localStorage = localStorageMock;
 
-// alert'i test için taklit ediyoruz
 global.alert = vi.fn();
 // ----------------------
 
-// UI fonksiyonlarını mock'luyoruz
 vi.mock('../scripts/ui.js', () => ({
     showDashboard: vi.fn(),
     showLogin: vi.fn()
