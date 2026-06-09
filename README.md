@@ -6,8 +6,7 @@ HR Core Dashboard is a responsive administrative web application developed to ma
 
 This project was developed using HTML5, CSS3, and Vanilla JavaScript following a modular architecture.
 Commit Convention: This project strictly follows Conventional Commits (e.g., feat:, fix:, docs:).
-User name (Email Address): admin@hr.com
-Password: admin1234
+
 ---
 
 ## Features
@@ -119,6 +118,8 @@ So that my session remains secure.
 * Valid email format is required
 * Password must contain at least 8 characters
 * Password must contain at least one number
+* Email Address: admin@hr.com
+* Password: admin1234
 
 ### Dashboard
 
